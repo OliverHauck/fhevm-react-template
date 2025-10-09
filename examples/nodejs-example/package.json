@@ -1,0 +1,21 @@
+{
+  "name": "fhevm-nodejs-example",
+  "version": "1.0.0",
+  "description": "Node.js example using Universal FHEVM SDK",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "encrypt": "node examples/encrypt.js",
+    "contract": "node examples/contract.js",
+    "server": "node examples/server.js"
+  },
+  "dependencies": {
+    "@astral/fhevm-sdk": "^1.0.0",
+    "ethers": "^5.7.2",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}
