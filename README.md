@@ -117,7 +117,7 @@ const encrypted = await fhevm.encrypt.uint8(42);
 ## 🏗️ Project Structure
 
 ```
-fhevm-universal-sdk/
+fhevm-react-template/
 ├── lib/
 │   └── fhevm-sdk/              # ⭐ Core SDK Package
 │       ├── src/
@@ -355,7 +355,7 @@ npm start
 - **[API Reference](./lib/fhevm-sdk/docs/API.md)** - Complete API documentation
 - **[Quick Start](./lib/fhevm-sdk/docs/QUICKSTART.md)** - 5-minute setup guide
 - **[Framework Guides](./lib/fhevm-sdk/docs/FRAMEWORKS.md)** - React, Vue, Node.js
-- **[Migration Guide](./lib/fhevm-sdk/docs/MIGRATION.md)** - Upgrading to v0.5
+
 
 ---
 
@@ -475,10 +475,10 @@ MIT © 2024 Universal FHEVM SDK
 
 ## 📊 Project Stats
 
-![GitHub stars](https://img.shields.io/github/stars/OliverHauck/fheAstralCompatibility?style=social)
-![GitHub forks](https://img.shields.io/github/forks/OliverHauck/fheAstralCompatibility?style=social)
-![GitHub issues](https://img.shields.io/github/issues/OliverHauck/fheAstralCompatibility)
-![GitHub license](https://img.shields.io/github/license/OliverHauck/fheAstralCompatibility)
+![GitHub stars](https://img.shields.io/github/stars/OliverHauck/fhevm-react-template?style=social)
+![GitHub forks](https://img.shields.io/github/forks/OliverHauck/fhevm-react-template?style=social)
+![GitHub issues](https://img.shields.io/github/issues/OliverHauck/fhevm-react-template)
+![GitHub license](https://img.shields.io/github/license/OliverHauck/fhevm-react-template)
 
 ---
 
