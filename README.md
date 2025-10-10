@@ -8,7 +8,7 @@
 
 **Live Demo**: [https://oliverhauck.github.io/fheAstralCompatibility/](https://oliverhauck.github.io/fheAstralCompatibility/)
 
-**Repository**: [https://github.com/OliverHauck/fheAstralCompatibility](https://github.com/OliverHauck/fheAstralCompatibility)
+**Repository**: [https://github.com/OliverHauck/fhevm-react-template](https://github.com/OliverHauck/fhevm-react-template)
 
 ---
 
@@ -462,14 +462,14 @@ MIT © 2024 Universal FHEVM SDK
 
 ### Links
 - 🌐 **Website**: [https://oliverhauck.github.io/fheAstralCompatibility/](https://oliverhauck.github.io/fheAstralCompatibility/)
-- 📦 **GitHub**: [https://github.com/OliverHauck/fheAstralCompatibility](https://github.com/OliverHauck/fheAstralCompatibility)
+- 📦 **GitHub**: [https://github.com/OliverHauck/fhevm-react-template](https://github.com/OliverHauck/fhevm-react-template)
 - 🔍 **Contract**: [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x3897f97Cdfa21926450B05329B55AC7F85F7F066)
 - 📚 **SDK Docs**: [lib/fhevm-sdk/README.md](./lib/fhevm-sdk/README.md)
 
 ### Get Help
 - 💬 **Discord**: [Zama Community](https://discord.gg/zama)
 - 📧 **Email**: support@example.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/OliverHauck/fheAstralCompatibility/issues)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/OliverHauck/fhevm-react-template/issues)
 
 ---
 
@@ -488,7 +488,7 @@ MIT © 2024 Universal FHEVM SDK
 
 **Built with ❤️ for the FHEVM Season 2 Bounty**
 
-[Website](https://oliverhauck.github.io/fheAstralCompatibility/) • [GitHub](https://github.com/OliverHauck/fheAstralCompatibility) • [SDK Docs](./lib/fhevm-sdk/README.md) • [Issues](https://github.com/OliverHauck/fheAstralCompatibility/issues)
+[Website](https://oliverhauck.github.io/fheAstralCompatibility/) • [GitHub](https://github.com/OliverHauck/fhevm-react-template) • [SDK Docs](./lib/fhevm-sdk/README.md) • [Issues](https://github.com/OliverHauck/fhevm-react-template/issues)
 
 </div>
 
