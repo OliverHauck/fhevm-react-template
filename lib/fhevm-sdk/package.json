@@ -1,0 +1,75 @@
+{
+  "name": "@astral/fhevm-sdk",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Universal FHEVM SDK - Framework-agnostic encryption and decryption for web3",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.esm.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "require": "./dist/react.js",
+      "import": "./dist/react.esm.js",
+      "types": "./dist/react.d.ts"
+    },
+    "./vue": {
+      "require": "./dist/vue.js",
+      "import": "./dist/vue.esm.js",
+      "types": "./dist/vue.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "fhevm",
+    "fhe",
+    "zama",
+    "encryption",
+    "privacy",
+    "web3",
+    "react",
+    "vue",
+    "nextjs",
+    "blockchain"
+  ],
+  "author": "Astral Compatibility Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "ethers": "^5.7.0 || ^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "fhevmjs": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-dts": "^6.0.0",
+    "tslib": "^2.6.0"
+  }
+}
