@@ -28,14 +28,15 @@ The **Universal FHEVM SDK** is a developer-friendly solution for building confid
 
 ## 🎥 Video Demo
 
-📹 **Download and watch `demo.mp4`** to see the complete SDK setup, integration workflow, and the showcase application in action.
+📹 **Download and watch `demo.mp4`** to see the complete SDK setup, integration workflow, and example applications in action.
 
 The demo covers:
 - SDK installation and configuration
-- Framework integration (React, Vue, Node.js)
+- Framework integration (React, Vue, Node.js, Next.js)
 - Encryption and decryption workflows
 - Contract integration patterns
-- Complete dApp example (Astral Compatibility)
+- Three complete example applications
+- Showcase dApp (Astral Compatibility)
 
 ---
 
@@ -126,8 +127,17 @@ fhevm-react-template/
 │       │   ├── vue/            # Vue composables
 │       │   └── types/          # TypeScript definitions
 │       ├── dist/               # Built SDK (12 files, 196KB)
+│       ├── docs/               # Complete documentation
+│       │   ├── API.md          # API reference
+│       │   ├── QUICKSTART.md   # Quick start guide
+│       │   └── FRAMEWORKS.md   # Framework integration
 │       ├── package.json
 │       └── README.md
+│
+├── examples/                   # Example implementations
+│   ├── nextjs-demo/           # Next.js 14 App Router demo
+│   ├── vue-example/           # Vue 3 Composition API demo
+│   └── nodejs-example/        # Node.js CLI & Express demo
 │
 ├── contracts/                  # Smart contracts (fhEVM v0.5)
 │   ├── AstralCompatibility.sol      # FHE contract
@@ -321,6 +331,28 @@ const encrypted = await fhevm.encrypt.uint8(42);
 - ✅ Extensible design
 - ✅ Well-documented patterns
 
+### Example Applications
+Three complete example applications demonstrate SDK versatility:
+
+**Next.js Demo** (`examples/nextjs-demo/`)
+- Modern Next.js 14 App Router
+- React Hooks integration
+- Wallet connection with MetaMask
+- Responsive UI with gradient design
+- Production-ready TypeScript setup
+
+**Vue 3 Demo** (`examples/vue-example/`)
+- Vue 3 Composition API
+- Reactive composables
+- Vite development server
+- Component-based architecture
+
+**Node.js Demo** (`examples/nodejs-example/`)
+- CLI encryption tool
+- Express REST API server
+- Backend integration patterns
+- Server-side encryption workflows
+
 ---
 
 ## 🛠️ Development
@@ -356,6 +388,60 @@ npm start
 - **[Quick Start](./lib/fhevm-sdk/docs/QUICKSTART.md)** - 5-minute setup guide
 - **[Framework Guides](./lib/fhevm-sdk/docs/FRAMEWORKS.md)** - React, Vue, Node.js
 
+## 🎯 Example Applications
+
+### 1. Next.js Demo (`examples/nextjs-demo/`)
+**Modern Next.js 14 with App Router** - Production-ready example showing:
+- ✅ Encryption with multiple types (uint8, uint16, uint32, bool)
+- ✅ Contract interaction with wallet connection
+- ✅ Decryption workflow with permission handling
+- ✅ React Hooks API (`useEncrypt`, `useDecrypt`, `useContract`)
+- ✅ Beautiful gradient UI with responsive design
+- ✅ TypeScript for full type safety
+
+**Quick Start:**
+```bash
+cd examples/nextjs-demo
+npm install
+npm run dev
+# Open http://localhost:3000
+```
+
+[View Documentation →](./examples/nextjs-demo/README.md)
+
+### 2. Vue 3 Demo (`examples/vue-example/`)
+**Vue 3 with Composition API** - Demonstrates composables:
+- ✅ Reactive encryption with `useEncrypt()`
+- ✅ Contract interaction with `useContract()`
+- ✅ Decryption with `useDecrypt()`
+- ✅ Vite for fast development
+- ✅ Modern Vue 3 patterns
+
+**Quick Start:**
+```bash
+cd examples/vue-example
+npm install
+npm run dev
+```
+
+[View Documentation →](./examples/vue-example/README.md)
+
+### 3. Node.js Demo (`examples/nodejs-example/`)
+**Backend Integration** - CLI tool and Express API server:
+- ✅ CLI tool for quick encryption/decryption
+- ✅ REST API with 4 endpoints
+- ✅ Backend encryption workflows
+- ✅ Server-side FHE integration
+
+**Quick Start:**
+```bash
+cd examples/nodejs-example
+npm install
+node index.js        # CLI tool
+node examples/server.js  # Express server
+```
+
+[View Documentation →](./examples/nodejs-example/README.md)
 
 ---
 
@@ -379,7 +465,33 @@ npx hardhat compile
 npx hardhat run scripts/deploy-mock.js --network sepolia
 ```
 
-### 4. Launch Showcase App
+### 4. Run Examples
+
+**Next.js Example:**
+```bash
+cd examples/nextjs-demo
+npm install
+npm run dev
+# Open http://localhost:3000
+```
+
+**Vue Example:**
+```bash
+cd examples/vue-example
+npm install
+npm run dev
+# Open http://localhost:5173
+```
+
+**Node.js Example:**
+```bash
+cd examples/nodejs-example
+npm install
+node index.js              # CLI tool
+node examples/server.js    # Express server
+```
+
+### 5. Launch Showcase App
 ```bash
 npm start
 ```
