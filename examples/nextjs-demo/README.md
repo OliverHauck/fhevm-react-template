@@ -1,67 +1,175 @@
-# FHEVM SDK - Next.js Demo
+# 🌟 FHEVM SDK - Next.js Demo
 
-A complete demonstration of the Universal FHEVM SDK integrated with Next.js 14 App Router.
+Complete demonstration of Fully Homomorphic Encryption (FHE) in Next.js 14 using the Universal FHEVM SDK.
 
-## Features
+## 📋 Features
 
-- **🔒 Encryption Demo** - Encrypt values using FHE (uint8, uint16, uint32, bool)
-- **📝 Contract Interaction** - Create encrypted inputs and generate proofs
-- **🔓 Decryption Demo** - Request decryption of encrypted values
-- **🎨 Modern UI** - Beautiful gradient design with responsive layout
-- **⚡ React Hooks** - Simple API using `useEncrypt()`, `useDecrypt()`, `useContract()`
+### Core SDK Features
+- ✅ **Encryption Demo** - Encrypt multiple data types (uint8, uint16, uint32, bool)
+- ✅ **Contract Integration** - Create encrypted contract inputs with proofs
+- ✅ **Decryption Workflow** - Request and process decryption with permissions
+- ✅ **Homomorphic Computation** - Perform operations on encrypted data
 
-## Quick Start
+### System Management
+- ✅ **Key Management** - Handle public/private encryption keys
+- ✅ **API Routes** - Server-side FHE operations
 
-### Prerequisites
+### Real-World Examples
+- ✅ **Confidential Banking** - Private financial transactions
+- ✅ **Health Records** - HIPAA-compliant medical data processing
 
-- Node.js 18+ installed
-- MetaMask or compatible Web3 wallet
-- Sepolia testnet ETH (for transactions)
+## 🏗️ Project Structure
+
+```
+nextjs-demo/
+├── app/                        # Next.js App Router
+│   ├── layout.tsx              # Root layout
+│   ├── page.tsx                # Main page
+│   ├── globals.css             # Global styles
+│   ├── components/             # Original demo components
+│   │   ├── EncryptionDemo.tsx
+│   │   ├── ContractDemo.tsx
+│   │   └── DecryptionDemo.tsx
+│   └── api/                    # API routes
+│       ├── fhe/
+│       │   ├── route.ts         # Main FHE endpoint
+│       │   ├── encrypt/route.ts # Encryption API
+│       │   ├── decrypt/route.ts # Decryption API
+│       │   └── compute/route.ts # Computation API
+│       └── keys/route.ts       # Key management API
+│
+├── components/                 # React components
+│   ├── ui/                     # Base UI components
+│   │   ├── Button.tsx
+│   │   ├── Input.tsx
+│   │   └── Card.tsx
+│   ├── fhe/                    # FHE feature components
+│   │   ├── FHEProvider.tsx     # FHE context provider
+│   │   ├── ComputationDemo.tsx # Computation demo
+│   │   └── KeyManager.tsx      # Key management UI
+│   └── examples/               # Use case examples
+│       ├── BankingExample.tsx  # Banking use case
+│       └── MedicalExample.tsx  # Medical use case
+│
+├── lib/                        # Utility libraries
+│   ├── fhe/                    # FHE integration
+│   │   ├── client.ts           # Client-side FHE ops
+│   │   └── server.ts           # Server-side FHE ops
+│   └── utils/                  # Helper functions
+│       ├── security.ts         # Security utilities
+│       └── validation.ts       # Input validation
+│
+├── hooks/                      # Custom React hooks
+│   ├── useFHE.ts               # Main FHE hook
+│   ├── useEncryption.ts        # Encryption hook
+│   └── useComputation.ts       # Computation hook
+│
+└── types/                      # TypeScript types
+    ├── fhe.ts                  # FHE type definitions
+    └── api.ts                  # API types
+```
+
+## 🚀 Quick Start
 
 ### Installation
 
 ```bash
-# Install dependencies
+cd examples/nextjs-demo
 npm install
+```
 
-# Run development server
+### Development
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the demo.
+Open [http://localhost:3000](http://localhost:3000) to see the demo.
 
-## Project Structure
+### Build for Production
 
-```
-nextjs-demo/
-├── app/
-│   ├── components/
-│   │   ├── EncryptionDemo.tsx      # Encryption component
-│   │   ├── ContractDemo.tsx        # Contract interaction
-│   │   └── DecryptionDemo.tsx      # Decryption component
-│   ├── layout.tsx                  # Root layout
-│   ├── page.tsx                    # Home page
-│   └── globals.css                 # Global styles
-├── package.json
-├── tsconfig.json
-├── next.config.js
-└── README.md
+```bash
+npm run build
+npm start
 ```
 
-## Usage
+## 📚 API Endpoints
 
-### 1. Encryption Demo
+### FHE Operations
 
-The encryption demo shows how to encrypt different data types:
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/fhe` | Check FHE service status |
+| `POST` | `/api/fhe/encrypt` | Encrypt values server-side |
+| `POST` | `/api/fhe/decrypt` | Request decryption |
+| `POST` | `/api/fhe/compute` | Perform homomorphic computation |
 
-```tsx
-import { useEncrypt } from '@astral/fhevm-sdk/react';
+### Key Management
 
-function EncryptionDemo() {
-  const { encrypt, encrypting, error } = useEncrypt();
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/keys` | Get public encryption keys |
+| `POST` | `/api/keys` | Manage encryption keys |
+
+### Example API Requests
+
+**Encrypt a value:**
+```bash
+curl -X POST http://localhost:3000/api/fhe/encrypt \
+  -H "Content-Type: application/json" \
+  -d '{"value": 42, "type": "uint8"}'
+```
+
+**Batch encryption:**
+```bash
+curl -X POST http://localhost:3000/api/fhe/encrypt \
+  -H "Content-Type: application/json" \
+  -d '{
+    "batch": true,
+    "items": [
+      {"value": 42, "type": "uint8"},
+      {"value": 1000, "type": "uint16"}
+    ]
+  }'
+```
+
+**Homomorphic computation:**
+```bash
+curl -X POST http://localhost:3000/api/fhe/compute \
+  -H "Content-Type: application/json" \
+  -d '{
+    "operation": "add",
+    "operand1": "0x...",
+    "operand2": "0x..."
+  }'
+```
+
+## 🎯 SDK Integration Examples
+
+### Client-Side Encryption
+
+```typescript
+import { encryptValue } from '@/lib/fhe/client';
+
+// Initialize FHE (done automatically by FHEProvider)
+const encrypted = await encryptValue(42, 'uint8');
+```
+
+### Using React Hooks
+
+```typescript
+import { useEncryption } from '@/hooks/useEncryption';
+
+function MyComponent() {
+  const { encrypt, encrypting, error } = useEncryption();
 
   const handleEncrypt = async () => {
-    await encrypt(42, 'uint8');
+    try {
+      const result = await encrypt(42, 'uint8');
+      console.log('Encrypted:', result);
+    } catch (err) {
+      console.error('Encryption failed:', err);
+    }
   };
 
   return (
@@ -72,209 +180,131 @@ function EncryptionDemo() {
 }
 ```
 
-**Supported Types:**
-- `uint8` - 0 to 255
-- `uint16` - 0 to 65,535
-- `uint32` - 0 to 4,294,967,295
-- `bool` - true/false
+### Server-Side Operations
 
-### 2. Contract Interaction Demo
+```typescript
+import { serverEncrypt, batchEncrypt } from '@/lib/fhe/server';
 
-Shows how to create encrypted inputs for smart contracts:
+// Single encryption
+const encrypted = await serverEncrypt(42, 'uint8');
 
-```tsx
-import { useContract } from '@astral/fhevm-sdk/react';
-
-function ContractDemo() {
-  const { createInput } = useContract();
-
-  const handleSubmit = async () => {
-    // Create encrypted input
-    const input = createInput(contractAddress, userAddress);
-    input.add8(42);
-
-    // Generate proof
-    const { handles, inputProof } = await input.encrypt();
-
-    // Use handles and inputProof in your contract call
-  };
-}
+// Batch encryption
+const results = await batchEncrypt([
+  { value: 42, type: 'uint8' },
+  { value: 1000, type: 'uint16' }
+]);
 ```
 
-**Input Methods:**
-- `input.add8(value)` - Add uint8
-- `input.add16(value)` - Add uint16
-- `input.add32(value)` - Add uint32
-- `input.add64(value)` - Add uint64
-- `input.addBool(value)` - Add boolean
-- `input.addAddress(value)` - Add address
+## 💼 Use Case Examples
 
-### 3. Decryption Demo
+### Confidential Banking
 
-Request decryption of encrypted values:
+Process financial transactions without revealing balances:
 
-```tsx
-import { useDecrypt } from '@astral/fhevm-sdk/react';
+```typescript
+import { BankingExample } from '@/components/examples/BankingExample';
 
-function DecryptionDemo() {
-  const { requestDecryption, decrypting, error } = useDecrypt();
-
-  const handleDecrypt = async () => {
-    const decrypted = await requestDecryption(handle, contractAddress);
-    console.log('Decrypted value:', decrypted);
-  };
-}
+// Encrypt account balance and transaction amount
+// Verify sufficient funds on encrypted data
+// Process transfer without decryption
 ```
 
-## Configuration
+### Health Records
 
-### FHEVM Provider
+HIPAA-compliant medical data analysis:
 
-Wrap your application with `FHEVMProvider`:
+```typescript
+import { MedicalExample } from '@/components/examples/MedicalExample';
 
-```tsx
-import { FHEVMProvider } from '@astral/fhevm-sdk/react';
-
-export default function App() {
-  return (
-    <FHEVMProvider config={{ chainId: 11155111 }}>
-      {/* Your components */}
-    </FHEVMProvider>
-  );
-}
+// Encrypt health metrics (heart rate, blood pressure, glucose)
+// Analyze medical conditions on encrypted data
+// Maintain patient privacy and compliance
 ```
 
-**Configuration Options:**
-- `chainId` - Network chain ID (11155111 for Sepolia)
-- `gatewayUrl` - Custom gateway URL (optional)
-- `aclAddress` - Custom ACL contract address (optional)
+## 🔧 Configuration
 
-## Available Scripts
+### Environment Variables
 
-```bash
-# Development server
-npm run dev
-
-# Production build
-npm run build
-
-# Start production server
-npm start
-
-# Type checking
-npm run type-check
-
-# Linting
-npm run lint
-```
-
-## Environment Variables
-
-Create a `.env.local` file for custom configuration:
+Create `.env.local`:
 
 ```env
-# Network Configuration
 NEXT_PUBLIC_CHAIN_ID=11155111
-
-# Contract Addresses (optional)
-NEXT_PUBLIC_CONTRACT_ADDRESS=0x3897f97Cdfa21926450B05329B55AC7F85F7F066
+NEXT_PUBLIC_RPC_URL=https://sepolia.infura.io/v3/YOUR_KEY
 ```
 
-## Testing
+### TypeScript Configuration
 
-### Manual Testing
+The project uses path aliases for clean imports:
 
-1. **Test Encryption:**
-   - Enter a value (e.g., 42)
-   - Select a type (e.g., uint8)
-   - Click "Encrypt"
-   - Check for success message
+```typescript
+// tsconfig.json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "@astral/fhevm-sdk": ["../../lib/fhevm-sdk/src"],
+      "@astral/fhevm-sdk/react": ["../../lib/fhevm-sdk/src/react"]
+    }
+  }
+}
+```
 
-2. **Test Contract Interaction:**
-   - Click "Connect Wallet"
-   - Approve MetaMask connection
-   - Enter contract address and value
-   - Click "Create Encrypted Input"
-   - Verify proof generation
+## 📖 Documentation
 
-3. **Test Decryption:**
-   - Enter an encrypted handle
-   - Enter contract address
-   - Click "Decrypt"
-   - Verify decrypted value
+- **SDK Documentation**: `../../lib/fhevm-sdk/README.md`
+- **API Reference**: `../../lib/fhevm-sdk/docs/API.md`
+- **Framework Guide**: `../../lib/fhevm-sdk/docs/FRAMEWORKS.md`
 
-## Deployment
+## 🛠️ Tech Stack
 
-### Vercel (Recommended)
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **FHE SDK**: Universal FHEVM SDK
+- **Encryption**: Zama's fhEVM v0.5
+
+## 🎨 Features Showcase
+
+### Interactive Demos
+- Real-time encryption with loading states
+- Error handling and validation
+- Responsive design for all screen sizes
+
+### Code Quality
+- Full TypeScript type safety
+- ESLint and Prettier configured
+- Modular component architecture
+- Reusable hooks and utilities
+
+### Production Ready
+- Server-side rendering (SSR)
+- API route handlers
+- Environment configuration
+- Build optimization
+
+## 🚦 Testing
+
+Test the application functionality:
 
 ```bash
-# Install Vercel CLI
-npm install -g vercel
+# Test encryption endpoint
+curl http://localhost:3000/api/fhe
 
-# Deploy
-vercel
+# Test all features in browser
+npm run dev
+# Open http://localhost:3000
 ```
 
-### Other Platforms
+## 📝 License
 
-```bash
-# Build for production
-npm run build
+MIT © 2024 Universal FHEVM SDK
 
-# The .next folder contains the production build
-# Deploy the entire project directory
-```
+## 🙏 Acknowledgments
 
-## Common Issues
-
-### MetaMask Not Detected
-
-**Solution:** Install MetaMask browser extension and refresh the page.
-
-### Wrong Network
-
-**Solution:** Switch MetaMask to Sepolia testnet.
-
-### Decryption Permission Denied
-
-**Solution:** Ensure you have permission from the contract owner to decrypt values.
-
-### Build Errors
-
-**Solution:** Clear cache and reinstall:
-```bash
-rm -rf .next node_modules package-lock.json
-npm install
-npm run build
-```
-
-## Learn More
-
-- **FHEVM SDK Documentation** - [../../lib/fhevm-sdk/docs/API.md](../../lib/fhevm-sdk/docs/API.md)
-- **Quick Start Guide** - [../../lib/fhevm-sdk/docs/QUICKSTART.md](../../lib/fhevm-sdk/docs/QUICKSTART.md)
-- **Framework Integration** - [../../lib/fhevm-sdk/docs/FRAMEWORKS.md](../../lib/fhevm-sdk/docs/FRAMEWORKS.md)
-- **Next.js Documentation** - https://nextjs.org/docs
-- **Zama fhEVM** - https://docs.zama.ai/fhevm
-
-## Tech Stack
-
-- **Next.js 14** - React framework with App Router
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Universal FHEVM SDK** - Encryption/decryption
-- **Ethers.js v5** - Ethereum interactions
-- **CSS3** - Styling with gradients
-
-## License
-
-MIT License - See LICENSE file for details
-
-## Support
-
-- **GitHub Issues** - https://github.com/OliverHauck/fheAstralCompatibility/issues
-- **Zama Discord** - https://discord.fhe.org
-- **Documentation** - Check the docs folder
+- **[Zama](https://www.zama.ai/)** - fhEVM technology
+- **[Next.js](https://nextjs.org/)** - React framework
+- **[Vercel](https://vercel.com/)** - Deployment platform
 
 ---
 
-Built with ❤️ using [Universal FHEVM SDK](https://github.com/OliverHauck/fheAstralCompatibility)
+**Built for FHEVM Season 2 Bounty** 🏆
