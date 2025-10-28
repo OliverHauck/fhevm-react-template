@@ -124,15 +124,16 @@ fhevm-react-template/
 │       ├── src/
 │       │   ├── core/           # Framework-agnostic core
 │       │   ├── react/          # React hooks & provider
-│       │   ├── vue/            # Vue composables
+│       │   ├── vue/            # Vue composables (optional)
 │       │   └── types/          # TypeScript definitions
-│       ├── dist/               # Built SDK (12 files, 196KB)
-│       ├── docs/               # Complete documentation
-│       │   ├── API.md          # API reference
-│       │   ├── QUICKSTART.md   # Quick start guide
-│       │   └── FRAMEWORKS.md   # Framework integration
+│       ├── dist/               # Built SDK
 │       ├── package.json
 │       └── README.md
+│
+├── docs/                       # 📚 Complete Documentation
+│   ├── API.md                  # API reference
+│   ├── QUICKSTART.md           # Quick start guide
+│   └── DEPLOYMENT.md           # Deployment instructions
 │
 ├── examples/                   # Example implementations (4 demos)
 │   ├── nextjs-demo/           # Next.js 14 App Router + React Hooks
@@ -419,10 +420,16 @@ npm start
 
 ## 📚 Documentation
 
-- **[SDK Documentation](./lib/fhevm-sdk/README.md)** - Detailed SDK guide
-- **[API Reference](./lib/fhevm-sdk/docs/API.md)** - Complete API documentation
-- **[Quick Start](./lib/fhevm-sdk/docs/QUICKSTART.md)** - 5-minute setup guide
-- **[Framework Guides](./lib/fhevm-sdk/docs/FRAMEWORKS.md)** - React, Vue, Node.js
+### SDK Documentation
+- **[SDK Overview](./lib/fhevm-sdk/README.md)** - Detailed SDK guide
+- **[API Reference](./docs/API.md)** - Complete API documentation
+- **[Quick Start Guide](./docs/QUICKSTART.md)** - 5-minute setup guide
+- **[Deployment Guide](./docs/DEPLOYMENT.md)** - Production deployment instructions
+
+### Framework-Specific Guides
+- **[Next.js Example](./examples/nextjs-demo/README.md)** - React Hooks integration
+- **[Vue Example](./examples/vue-example/README.md)** - Vue Composables integration
+- **[Node.js Example](./examples/nodejs-example/README.md)** - Backend integration
 
 ## 🎯 Example Applications
 
