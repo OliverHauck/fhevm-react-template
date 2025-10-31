@@ -1,294 +1,130 @@
-# Node.js + FHEVM SDK Example
+# Node.js FHEVM SDK Demo
 
-Complete Node.js examples using the Universal FHEVM SDK.
+This example demonstrates how to integrate the FHEVM SDK into Node.js applications, including a CLI tool and an Express REST API server.
 
 ## Features
 
-- ✅ **Basic Encryption** - Encrypt all data types
-- ✅ **Contract Integration** - Create encrypted contract inputs
-- ✅ **Express.js Server** - REST API for encryption
-- ✅ **Batch Operations** - Process multiple encryptions
-- ✅ **TypeScript Support** - Full type safety
-- ✅ **Error Handling** - Proper error management
+- CLI encryption tool
+- Express REST API server (4 endpoints)
+- Backend integration patterns
+- Server-side encryption workflows
+- Direct SDK core API usage
 
-## Quick Start
+## SDK Integration
 
-### 1. Install Dependencies
-
-```bash
-npm install
-```
-
-### 2. Run Examples
-
-#### Basic Example
-```bash
-npm start
-```
-
-#### Express Server
-```bash
-npm run server
-```
-
-Then make requests:
-
-```bash
-# Encrypt a value
-curl -X POST http://localhost:3000/api/encrypt \
-  -H "Content-Type: application/json" \
-  -d '{"value": 42, "type": "uint8"}'
-
-# Create contract input
-curl -X POST http://localhost:3000/api/contract/input \
-  -H "Content-Type: application/json" \
-  -d '{
-    "contractAddress": "0x3897f97Cdfa21926450B05329B55AC7F85F7F066",
-    "userAddress": "0x1234567890123456789012345678901234567890",
-    "values": [
-      {"type": "uint8", "value": 42},
-      {"type": "uint16", "value": 1000}
-    ]
-  }'
-
-# Batch encryption
-curl -X POST http://localhost:3000/api/encrypt/batch \
-  -H "Content-Type: application/json" \
-  -d '{
-    "items": [
-      {"type": "uint8", "value": 42},
-      {"type": "uint16", "value": 1000},
-      {"type": "bool", "value": true}
-    ]
-  }'
-```
-
-## Project Structure
-
-```
-nodejs-example/
-├── examples/
-│   └── server.js         # Express API server
-├── index.js              # Basic examples
-├── package.json
-└── README.md
-```
-
-## SDK Usage Examples
-
-### Basic Initialization
+The SDK is integrated in just 3 lines:
 
 ```javascript
 import { createFHEVM } from '@astral/fhevm-sdk';
 
 const fhevm = await createFHEVM({ chainId: 11155111 });
-```
-
-### Encrypt Data
-
-```javascript
-// Encrypt uint8
 const encrypted = await fhevm.encrypt.uint8(42);
-console.log('Data length:', encrypted.data.length);
-console.log('Handles:', encrypted.handles);
-
-// Encrypt uint16
-const encrypted16 = await fhevm.encrypt.uint16(1000);
-
-// Encrypt boolean
-const encryptedBool = await fhevm.encrypt.bool(true);
-
-// Encrypt address
-const encryptedAddr = await fhevm.encrypt.address('0x...');
 ```
 
-### Contract Integration
+## Getting Started
 
-```javascript
-// Create encrypted input
-const input = fhevm.contract.createInput(
-  '0x3897f97Cdfa21926450B05329B55AC7F85F7F066',
-  '0x1234567890123456789012345678901234567890'
-);
+### Install Dependencies
 
-// Add multiple values
-input
-  .add8(42)
-  .add16(1000)
-  .addBool(true);
-
-// Generate proof
-const { handles, inputProof } = await input.encrypt();
-
-// Submit to contract
-await contract.submitData(handles, inputProof);
+```bash
+npm install
 ```
 
-### Express Server
+### Run CLI Tool
 
-```javascript
-import express from 'express';
-import { createFHEVM } from '@astral/fhevm-sdk';
-
-const app = express();
-app.use(express.json());
-
-let fhevm;
-
-async function initialize() {
-  fhevm = await createFHEVM({ chainId: 11155111 });
-}
-
-app.post('/api/encrypt', async (req, res) => {
-  const { value, type } = req.body;
-  const encrypted = await fhevm.encrypt[type](value);
-  res.json({ success: true, encrypted });
-});
-
-initialize().then(() => {
-  app.listen(3000, () => console.log('Server running'));
-});
+```bash
+npm run cli
 ```
 
-### Error Handling
+This will run various encryption examples and demonstrate SDK capabilities.
 
-```javascript
-try {
-  const encrypted = await fhevm.encrypt.uint8(value);
-  console.log('Success:', encrypted);
-} catch (error) {
-  console.error('Encryption failed:', error.message);
-}
+### Run Express Server
+
+```bash
+npm run server
 ```
 
-### Batch Operations
-
-```javascript
-const items = [
-  { type: 'uint8', value: 42 },
-  { type: 'uint16', value: 1000 },
-  { type: 'bool', value: true }
-];
-
-const results = [];
-for (const { type, value } of items) {
-  const encrypted = await fhevm.encrypt[type](value);
-  results.push(encrypted);
-}
-
-console.log('Encrypted', results.length, 'items');
-```
+The server will start on `http://localhost:3000`
 
 ## API Endpoints
 
-When running the Express server (`npm run server`):
-
-### GET /health
-Health check endpoint.
-
-**Response:**
-```json
-{
-  "status": "ok",
-  "fhevm": "ready"
-}
+### Health Check
+```bash
+GET /health
 ```
 
-### POST /api/encrypt
-Encrypt a single value.
+### Encrypt Single Value
+```bash
+POST /api/encrypt
+Content-Type: application/json
 
-**Request:**
-```json
 {
   "value": 42,
   "type": "uint8"
 }
 ```
 
-**Response:**
-```json
+### Encrypt Multiple Values
+```bash
+POST /api/encrypt/batch
+Content-Type: application/json
+
 {
-  "success": true,
-  "encrypted": {
-    "dataLength": 128,
-    "handlesCount": 1
-  }
+  "values": [
+    { "value": 42, "type": "uint8" },
+    { "value": 1000, "type": "uint16" }
+  ]
 }
 ```
 
-### POST /api/contract/input
-Create encrypted contract input.
+### Create Contract Input
+```bash
+POST /api/contract/input
+Content-Type: application/json
 
-**Request:**
-```json
 {
   "contractAddress": "0x...",
   "userAddress": "0x...",
-  "values": [
-    {"type": "uint8", "value": 42},
-    {"type": "uint16", "value": 1000}
+  "inputs": [
+    { "value": 10, "type": "uint8" },
+    { "value": 500, "type": "uint16" }
   ]
 }
 ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "handles": ["0x...", "0x..."],
-  "inputProof": "0x...",
-  "valuesCount": 2
-}
+## Project Structure
+
+```
+nodejs-example/
+├── index.js              # CLI tool
+├── examples/
+│   └── server.js         # Express API server
+├── package.json
+└── README.md
 ```
 
-### POST /api/encrypt/batch
-Encrypt multiple values at once.
+## SDK Usage Examples
 
-**Request:**
-```json
-{
-  "items": [
-    {"type": "uint8", "value": 42},
-    {"type": "bool", "value": true}
-  ]
-}
+### CLI Encryption
+
+```javascript
+import { createFHEVM } from '@astral/fhevm-sdk';
+
+const fhevm = await createFHEVM({ chainId: 11155111 });
+const encrypted = await fhevm.encrypt.uint8(42);
 ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "results": [
-    {"type": "uint8", "value": 42, "dataLength": 128, "handlesCount": 1},
-    {"type": "bool", "value": true, "dataLength": 128, "handlesCount": 1}
-  ],
-  "count": 2
-}
+### Express API Endpoint
+
+```javascript
+app.post('/api/encrypt', async (req, res) => {
+  const fhevm = await createFHEVM({ chainId: 11155111 });
+  const encrypted = await fhevm.encrypt.uint8(req.body.value);
+  res.json({ encrypted });
+});
 ```
-
-## Environment Variables
-
-- `PORT` - Server port (default: 3000)
-
-## Technologies
-
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web framework
-- **FHEVM SDK** - Fully Homomorphic Encryption
-- **ES Modules** - Modern JavaScript modules
 
 ## Learn More
 
 - [FHEVM SDK Documentation](../../lib/fhevm-sdk/README.md)
-- [API Reference](../../lib/fhevm-sdk/docs/API.md)
-- [Express Documentation](https://expressjs.com/)
-
-## Support
-
-- 💬 [Discord Community](https://discord.gg/zama)
-- 🐛 [Report Issues](https://github.com/OliverHauck/fheAstralCompatibility/issues)
-- 📚 [Full Documentation](https://github.com/OliverHauck/fheAstralCompatibility)
-
----
-
-**Built with ❤️ using Universal FHEVM SDK**
+- [Express.js Documentation](https://expressjs.com/)
+- [Zama FHEVM](https://docs.zama.ai/fhevm)
