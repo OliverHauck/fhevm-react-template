@@ -6,7 +6,7 @@
 [![fhEVM](https://img.shields.io/badge/fhEVM-v0.5-purple)](https://www.zama.ai/fhevm)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 
-**Live Demo**: [https://oliverhauck.github.io/fheAstralCompatibility/](https://oliverhauck.github.io/fheAstralCompatibility/)
+**Live Demo**: [https://oliverhauck.github.io/FHEAstralCompatibility/](https://oliverhauck.github.io/FHEAstralCompatibility/)
 
 **Demo Video**: [demo.mp4]
 
