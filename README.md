@@ -134,10 +134,11 @@ fhevm-react-template/
 │       ├── package.json
 │       └── README.md
 │
-├── examples/                   # Example implementations
-│   ├── nextjs-demo/           # Next.js 14 App Router demo
-│   ├── vue-example/           # Vue 3 Composition API demo
-│   └── nodejs-example/        # Node.js CLI & Express demo
+├── examples/                   # Example implementations (4 demos)
+│   ├── nextjs-demo/           # Next.js 14 App Router + React Hooks
+│   ├── vue-example/           # Vue 3 Composition API + Composables
+│   ├── nodejs-example/        # Node.js CLI & Express API Server
+│   └── FHEAstralCompatibility/ # Vanilla JS Showcase dApp
 │
 ├── contracts/                  # Smart contracts (fhEVM v0.5)
 │   ├── AstralCompatibility.sol      # FHE contract
@@ -271,24 +272,45 @@ function EncryptionDemo() {
 
 ## 🎨 Showcase Application
 
-**Astral Compatibility** demonstrates the SDK through a privacy-preserving zodiac matching platform:
-
-### Features
-- ✅ **Encrypted Profiles** - Zodiac data never revealed
-- ✅ **Private Matching** - Compatibility calculated on encrypted data
-- ✅ **Decryption Flow** - Request-based score revelation
-- ✅ **Full FHE Integration** - Complete fhEVM v0.5 implementation
+**FHE Astral Compatibility** (`examples/FHEAstralCompatibility/`) is a complete production-ready dApp demonstrating privacy-preserving zodiac matching:
 
 ### Core Concept
-**Privacy-Preserving Zodiac Matching** - Users can discover zodiac compatibility without revealing their birth information, zodiac signs, or any astrological data. All computations happen on encrypted data using Fully Homomorphic Encryption.
+**Privacy-Preserving Zodiac Matching** - Users can discover astrological compatibility without revealing:
+- Birth dates or zodiac signs
+- Personal astrological data
+- Individual compatibility factors
 
-### Technology
+All computations happen on **encrypted data** using Fully Homomorphic Encryption on-chain.
+
+### Key Features
+- ✅ **Encrypted Profiles** - Zodiac data stored encrypted on-chain
+- ✅ **Private Matching** - Compatibility calculated on encrypted data
+- ✅ **Decryption Flow** - Request-based score revelation with permissions
+- ✅ **MetaMask Integration** - Seamless wallet connection
+- ✅ **Full FHE Integration** - Complete fhEVM v0.5 implementation
+- ✅ **Live Deployment** - Production dApp on Sepolia testnet
+
+### Technology Stack
 - **Smart Contracts**: Solidity 0.8.24 with fhEVM v0.5
-- **Frontend**: Vanilla JavaScript with SDK integration
+- **Frontend**: Vanilla JavaScript + ethers.js v5
+- **Web3**: MetaMask wallet connection
 - **Blockchain**: Sepolia testnet
 - **Encryption**: Zama's FHE technology
 
-**Contract Address**: `0x3897f97Cdfa21926450B05329B55AC7F85F7F066`
+### Contract Details
+- **Address**: `0x3897f97Cdfa21926450B05329B55AC7F85F7F066`
+- **Network**: Sepolia Testnet (Chain ID: 11155111)
+- **Explorer**: [View on Etherscan](https://sepolia.etherscan.io/address/0x3897f97Cdfa21926450B05329B55AC7F85F7F066)
+
+### How It Works
+1. **Connect Wallet** - Users connect MetaMask to interact with the dApp
+2. **Create Profile** - Select zodiac sign, which is encrypted and stored on-chain
+3. **Request Match** - Enter partner's address to calculate compatibility
+4. **Private Computation** - Smart contract calculates compatibility score on encrypted data
+5. **Reveal Score** - Request decryption with proper permissions to view the score
+
+### Live Demo
+🌐 **[Try it now](https://oliverhauck.github.io/fheAstralCompatibility/)** - Deployed on Sepolia testnet
 
 ---
 
@@ -332,26 +354,40 @@ const encrypted = await fhevm.encrypt.uint8(42);
 - ✅ Well-documented patterns
 
 ### Example Applications
-Three complete example applications demonstrate SDK versatility:
+Four complete example applications demonstrate SDK versatility across different frameworks:
 
-**Next.js Demo** (`examples/nextjs-demo/`)
-- Modern Next.js 14 App Router
-- React Hooks integration
-- Wallet connection with MetaMask
-- Responsive UI with gradient design
-- Production-ready TypeScript setup
+**1. Next.js Demo** (`examples/nextjs-demo/`)
+- ✅ Modern Next.js 14 App Router with React 18
+- ✅ SDK React Hooks integration (`useEncrypt`, `useContract`, `useDecrypt`)
+- ✅ FHEVMProvider for context management
+- ✅ Wallet connection with MetaMask
+- ✅ Responsive UI with gradient design
+- ✅ Production-ready TypeScript setup
+- ✅ **SDK Integration**: ~5 lines of code
 
-**Vue 3 Demo** (`examples/vue-example/`)
-- Vue 3 Composition API
-- Reactive composables
-- Vite development server
-- Component-based architecture
+**2. Vue 3 Demo** (`examples/vue-example/`)
+- ✅ Vue 3 Composition API
+- ✅ SDK Vue Composables (`useFHEVM`)
+- ✅ Reactive encryption workflows
+- ✅ Vite development server
+- ✅ Component-based architecture
+- ✅ **SDK Integration**: ~4 lines of code
 
-**Node.js Demo** (`examples/nodejs-example/`)
-- CLI encryption tool
-- Express REST API server
-- Backend integration patterns
-- Server-side encryption workflows
+**3. Node.js Demo** (`examples/nodejs-example/`)
+- ✅ CLI encryption tool
+- ✅ Express REST API server (4 endpoints)
+- ✅ Backend integration patterns
+- ✅ Server-side encryption workflows
+- ✅ Direct SDK core API usage
+- ✅ **SDK Integration**: ~3 lines of code
+
+**4. FHE Astral Compatibility** (`examples/FHEAstralCompatibility/`)
+- ✅ Complete production dApp (Vanilla JS)
+- ✅ Privacy-preserving zodiac matching
+- ✅ Traditional Web3 integration (ethers.js + MetaMask)
+- ✅ Real-world use case demonstration
+- ✅ Live deployment on Sepolia testnet
+- ✅ **Manual Integration**: ~50+ lines (shows SDK value!)
 
 ---
 
@@ -390,8 +426,26 @@ npm start
 
 ## 🎯 Example Applications
 
+All examples demonstrate **complete SDK integration** with different frameworks and use cases:
+
 ### 1. Next.js Demo (`examples/nextjs-demo/`)
-**Modern Next.js 14 with App Router** - Production-ready example showing:
+**Modern Next.js 14 with App Router** - Production-ready React example showing:
+
+**SDK Integration:**
+```tsx
+import { FHEVMProvider, useEncrypt, useContract } from '@astral/fhevm-sdk/react';
+
+// Wrap app with provider
+<FHEVMProvider config={{ chainId: 11155111 }}>
+  <App />
+</FHEVMProvider>
+
+// Use hooks in components
+const { encrypt, encrypting } = useEncrypt();
+const { createInput } = useContract();
+```
+
+**Features:**
 - ✅ Encryption with multiple types (uint8, uint16, uint32, bool)
 - ✅ Contract interaction with wallet connection
 - ✅ Decryption workflow with permission handling
@@ -409,39 +463,155 @@ npm run dev
 
 [View Documentation →](./examples/nextjs-demo/README.md)
 
+---
+
 ### 2. Vue 3 Demo (`examples/vue-example/`)
-**Vue 3 with Composition API** - Demonstrates composables:
-- ✅ Reactive encryption with `useEncrypt()`
-- ✅ Contract interaction with `useContract()`
-- ✅ Decryption with `useDecrypt()`
+**Vue 3 with Composition API** - Demonstrates Vue composables:
+
+**SDK Integration:**
+```vue
+<script setup>
+import { useFHEVM } from '@astral/fhevm-sdk/vue';
+import { createFHEVM } from '@astral/fhevm-sdk';
+
+// Initialize SDK on bootstrap
+await createFHEVM({ chainId: 11155111 });
+
+// Use composables
+const fhevm = useFHEVM();
+const encrypted = await fhevm.encrypt.uint8(42);
+</script>
+```
+
+**Features:**
+- ✅ Reactive encryption with `useFHEVM()` composable
+- ✅ Contract interaction with createInput API
+- ✅ Decryption with async workflows
 - ✅ Vite for fast development
-- ✅ Modern Vue 3 patterns
+- ✅ Modern Vue 3 Composition API patterns
 
 **Quick Start:**
 ```bash
 cd examples/vue-example
 npm install
 npm run dev
+# Open http://localhost:5173
 ```
 
 [View Documentation →](./examples/vue-example/README.md)
 
+---
+
 ### 3. Node.js Demo (`examples/nodejs-example/`)
 **Backend Integration** - CLI tool and Express API server:
+
+**SDK Integration:**
+```javascript
+import { createFHEVM } from '@astral/fhevm-sdk';
+
+// Initialize SDK (works in Node.js!)
+const fhevm = await createFHEVM({ chainId: 11155111 });
+
+// Use in CLI or server
+const encrypted = await fhevm.encrypt.uint8(42);
+
+// Express API endpoint
+app.post('/api/encrypt', async (req, res) => {
+  const encrypted = await fhevm.encrypt.uint8(req.body.value);
+  res.json({ success: true });
+});
+```
+
+**Features:**
 - ✅ CLI tool for quick encryption/decryption
-- ✅ REST API with 4 endpoints
+- ✅ REST API with 4 endpoints (`/encrypt`, `/encrypt/batch`, `/contract/input`, `/health`)
 - ✅ Backend encryption workflows
 - ✅ Server-side FHE integration
+- ✅ Express.js integration example
 
 **Quick Start:**
 ```bash
 cd examples/nodejs-example
 npm install
-node index.js        # CLI tool
-node examples/server.js  # Express server
+node index.js              # CLI tool
+node examples/server.js    # Express server on :3000
 ```
 
 [View Documentation →](./examples/nodejs-example/README.md)
+
+---
+
+### 4. FHE Astral Compatibility (`examples/FHEAstralCompatibility/`)
+**Vanilla JavaScript Showcase** - Complete dApp demonstrating privacy-preserving zodiac matching:
+
+**SDK Integration:**
+```javascript
+// Traditional Web3 integration (without SDK abstractions)
+// Uses ethers.js + MetaMask directly with contract interaction
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const contract = new ethers.Contract(address, abi, signer);
+
+// Profile creation with encrypted zodiac data
+await contract.createProfile(zodiacId, element, quality);
+
+// Request compatibility match (FHE computation on-chain)
+await contract.requestCompatibilityMatch(partnerAddress);
+```
+
+**Features:**
+- ✅ **Privacy-Preserving Zodiac Matching** - Match compatibility without revealing zodiac signs
+- ✅ Encrypted user profiles stored on-chain
+- ✅ Private compatibility calculations using FHE
+- ✅ Decryption workflow for revealing scores
+- ✅ MetaMask wallet connection
+- ✅ Sepolia testnet deployment
+- ✅ Complete FHE smart contract integration
+- ✅ Real-world use case demonstration
+
+**Core Concept:**
+Users can discover astrological compatibility with others **without revealing**:
+- Their birth date or zodiac sign
+- Personal astrological data
+- Individual compatibility factors
+
+All computations happen on **encrypted data** using Fully Homomorphic Encryption on-chain.
+
+**Technology Stack:**
+- Smart Contracts: Solidity 0.8.24 with fhEVM v0.5
+- Frontend: Vanilla JavaScript + ethers.js v5
+- Blockchain: Sepolia testnet
+- Encryption: Zama's FHE technology
+
+**Contract Address:** `0x3897f97Cdfa21926450B05329B55AC7F85F7F066`
+
+**Quick Start:**
+```bash
+cd examples/FHEAstralCompatibility
+npm install
+npx hardhat compile
+
+# Deploy (optional)
+npx hardhat run scripts/deploy.js --network sepolia
+
+# Run locally
+python -m http.server 8000
+# Open http://localhost:8000
+```
+
+**Live Demo:** [https://oliverhauck.github.io/fheAstralCompatibility/](https://oliverhauck.github.io/fheAstralCompatibility/)
+
+---
+
+## 📊 SDK Integration Comparison
+
+| Example | Framework | SDK Usage | Integration Pattern | Lines of Code |
+|---------|-----------|-----------|---------------------|---------------|
+| **Next.js** | React 18 + Next.js 14 | `@astral/fhevm-sdk/react` | Provider + Hooks | ~5 lines |
+| **Vue 3** | Vue 3 + Vite | `@astral/fhevm-sdk/vue` | Composables | ~4 lines |
+| **Node.js** | Node.js + Express | `@astral/fhevm-sdk` (core) | Direct API | ~3 lines |
+| **Astral** | Vanilla JS | ethers.js + fhevmjs | Manual integration | ~50+ lines |
+
+**Key Insight:** The SDK reduces FHE integration from 50+ lines (manual) to just 3-5 lines (SDK)!
 
 ---
 
@@ -467,7 +637,9 @@ npx hardhat run scripts/deploy-mock.js --network sepolia
 
 ### 4. Run Examples
 
-**Next.js Example:**
+Choose any example based on your framework preference:
+
+**Next.js Example (React Hooks):**
 ```bash
 cd examples/nextjs-demo
 npm install
@@ -475,7 +647,7 @@ npm run dev
 # Open http://localhost:3000
 ```
 
-**Vue Example:**
+**Vue Example (Composables):**
 ```bash
 cd examples/vue-example
 npm install
@@ -483,25 +655,47 @@ npm run dev
 # Open http://localhost:5173
 ```
 
-**Node.js Example:**
+**Node.js Example (CLI + API Server):**
 ```bash
 cd examples/nodejs-example
 npm install
 node index.js              # CLI tool
-node examples/server.js    # Express server
+node examples/server.js    # Express server on :3000
 ```
 
-### 5. Launch Showcase App
+**FHE Astral Compatibility (Vanilla JS Showcase):**
+```bash
+cd examples/FHEAstralCompatibility
+npm install
+npx hardhat compile
+
+# Option 1: Run with Python
+python -m http.server 8000
+# Open http://localhost:8000
+
+# Option 2: Run with Node.js http-server
+npx http-server -p 8000
+# Open http://localhost:8000
+
+# Option 3: View live deployment
+# https://oliverhauck.github.io/fheAstralCompatibility/
+```
+
+### 5. Launch Showcase App (Alternative)
+
+From the root directory, you can also launch the showcase app:
+
 ```bash
 npm start
 ```
 
-This opens the **Astral Compatibility** showcase demonstrating:
-- SDK initialization
-- Encrypted profile creation
-- Private compatibility matching
-- Decryption workflow
-- Complete FHE integration
+This opens the **Astral Compatibility** showcase in your browser, demonstrating:
+- ✅ MetaMask wallet connection
+- ✅ Encrypted profile creation with zodiac data
+- ✅ Private compatibility matching using FHE
+- ✅ Decryption workflow with permission handling
+- ✅ Complete FHE smart contract integration
+- ✅ Real-world use case of privacy-preserving computations
 
 ---
 
