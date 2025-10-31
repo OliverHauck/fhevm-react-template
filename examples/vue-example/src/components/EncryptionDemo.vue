@@ -1,155 +1,100 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { createFHEVM } from '@astral/fhevm-sdk'
+
+const value = ref('')
+const encrypted = ref('')
+const encrypting = ref(false)
+const error = ref('')
+
+async function handleEncrypt() {
+  if (!value.value) return
+  
+  encrypting.value = true
+  error.value = ''
+  
+  try {
+    const fhevm = await createFHEVM({ chainId: 11155111 })
+    const result = await fhevm.encrypt.uint8(parseInt(value.value))
+    encrypted.value = Buffer.from(result).toString('hex').substring(0, 32) + '...'
+  } catch (err: any) {
+    error.value = err.message || 'Encryption failed'
+    console.error('Encryption failed:', err)
+  } finally {
+    encrypting.value = false
+  }
+}
+</script>
+
 <template>
   <div class="card">
-    <h2>🔒 Encryption Demo</h2>
-    <p class="description">Encrypt data using FHE technology</p>
-
-    <div class="form-group">
-      <label>Value (0-255):</label>
+    <h2>Encryption Demo</h2>
+    <div class="demo-content">
       <input
-        v-model.number="value"
+        v-model="value"
         type="number"
-        min="0"
-        max="255"
-        placeholder="Enter a value"
+        placeholder="Enter a number (0-255)"
+        :disabled="encrypting"
       />
-    </div>
-
-    <div class="form-group">
-      <label>Type:</label>
-      <select v-model="selectedType">
-        <option value="uint8">uint8 (0-255)</option>
-        <option value="uint16">uint16 (0-65535)</option>
-        <option value="uint32">uint32</option>
-        <option value="bool">boolean</option>
-      </select>
-    </div>
-
-    <button
-      @click="handleEncrypt"
-      :disabled="encrypting"
-      class="btn-primary"
-    >
-      {{ encrypting ? '⏳ Encrypting...' : '🔒 Encrypt' }}
-    </button>
-
-    <div v-if="error" class="error-box">
-      ❌ {{ error.message }}
-    </div>
-
-    <div v-if="result" class="success-box">
-      ✅ {{ result }}
+      
+      <button
+        @click="handleEncrypt"
+        :disabled="encrypting || !value"
+      >
+        {{ encrypting ? 'Encrypting...' : 'Encrypt Value' }}
+      </button>
+      
+      <div v-if="encrypted" class="result success">
+        <p class="label">Encrypted:</p>
+        <p class="value">{{ encrypted }}</p>
+      </div>
+      
+      <div v-if="error" class="result error">
+        <p>{{ error }}</p>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
-import { useEncrypt } from '@astral/fhevm-sdk/vue';
-
-const { encrypt, encrypting, error } = useEncrypt();
-
-const value = ref(42);
-const selectedType = ref('uint8');
-const result = ref('');
-
-const handleEncrypt = async () => {
-  try {
-    result.value = '';
-
-    let encryptValue = value.value;
-    if (selectedType.value === 'bool') {
-      encryptValue = value.value > 0;
-    }
-
-    await encrypt(encryptValue, selectedType.value);
-    result.value = `Successfully encrypted ${encryptValue} as ${selectedType.value}!`;
-  } catch (err) {
-    console.error('Encryption error:', err);
-  }
-};
-</script>
-
 <style scoped>
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
 h2 {
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.description {
-  color: #666;
-  margin-bottom: 24px;
-  font-size: 0.95rem;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #555;
-  font-weight: 500;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
-}
-
-input:focus, select:focus {
-  outline: none;
-  border-color: #667eea;
-}
-
-.btn-primary {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin-bottom: 1.5rem;
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s, opacity 0.3s;
+  font-size: 1.5rem;
 }
 
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
+.demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.result {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: left;
 }
 
-.error-box {
-  margin-top: 16px;
-  padding: 12px;
-  background: #fee;
-  border-left: 4px solid #f44;
-  border-radius: 4px;
-  color: #c00;
+.result.success {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.4);
 }
 
-.success-box {
-  margin-top: 16px;
-  padding: 12px;
-  background: #efe;
-  border-left: 4px solid #4c4;
-  border-radius: 4px;
-  color: #060;
+.result.error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.value {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #86efac;
+  word-break: break-all;
 }
 </style>

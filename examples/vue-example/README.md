@@ -1,132 +1,88 @@
-# Vue 3 + FHEVM SDK Example
+# Vue 3 FHEVM SDK Demo
 
-Complete example of using the Universal FHEVM SDK with Vue 3.
+This example demonstrates how to integrate the FHEVM SDK into a Vue 3 application using the Composition API.
 
 ## Features
 
-- ✅ **Encryption Demo** - Encrypt different data types
-- ✅ **Contract Interaction** - Submit encrypted data to smart contracts
-- ✅ **Decryption Demo** - Request and display decrypted values
-- ✅ **TypeScript Support** - Full type safety
-- ✅ **Reactive Composables** - Vue 3 Composition API
-- ✅ **Modern UI** - Beautiful gradient design
+- Vue 3 Composition API
+- SDK core integration
+- Reactive encryption workflows
+- Vite development server
+- TypeScript support
 
-## Quick Start
+## SDK Integration
 
-### 1. Install Dependencies
+The SDK is integrated in just 4 lines:
+
+```vue
+<script setup>
+import { createFHEVM } from '@astral/fhevm-sdk';
+
+// Initialize SDK
+await createFHEVM({ chainId: 11155111 });
+
+// Use SDK
+const fhevm = await createFHEVM({ chainId: 11155111 });
+const encrypted = await fhevm.encrypt.uint8(42);
+</script>
+```
+
+## Getting Started
+
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Run Development Server
+### Run Development Server
 
 ```bash
 npm run dev
 ```
 
-### 3. Open Browser
+Open [http://localhost:5173](http://localhost:5173) to view the demo.
 
-Navigate to `http://localhost:5173`
+### Build for Production
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Project Structure
 
 ```
-vue-example/
-├── src/
-│   ├── components/
-│   │   ├── EncryptionDemo.vue    # Encryption examples
-│   │   ├── ContractDemo.vue      # Contract interaction
-│   │   └── DecryptionDemo.vue    # Decryption examples
-│   ├── App.vue                   # Main app component
-│   └── main.ts                   # App entry point
-├── package.json
-└── README.md
+src/
+├── main.ts              # App entry with SDK initialization
+├── App.vue              # Main app component
+├── style.css            # Global styles
+└── components/
+    ├── EncryptionDemo.vue
+    └── ComputationDemo.vue
 ```
 
 ## SDK Usage Examples
 
 ### Encryption
 
-```vue
-<script setup>
-import { ref } from 'vue';
-import { useEncrypt } from '@astral/fhevm-sdk/vue';
+```typescript
+import { createFHEVM } from '@astral/fhevm-sdk';
 
-const { encrypt, encrypting, error } = useEncrypt();
-const value = ref(42);
-
-const handleEncrypt = async () => {
-  await encrypt(value.value, 'uint8');
-};
-</script>
-
-<template>
-  <button @click="handleEncrypt" :disabled="encrypting">
-    {{ encrypting ? 'Encrypting...' : 'Encrypt' }}
-  </button>
-</template>
+const fhevm = await createFHEVM({ chainId: 11155111 });
+const encrypted = await fhevm.encrypt.uint8(42);
 ```
 
-### Contract Interaction
+### Contract Input
 
-```vue
-<script setup>
-import { useContract } from '@astral/fhevm-sdk/vue';
-
-const { createInput } = useContract();
-
-const submitToContract = async () => {
-  const input = createInput(contractAddr, userAddr);
-  input.add8(42);
-  const { handles, inputProof } = await input.encrypt();
-  await contract.submit(handles, inputProof);
-};
-</script>
+```typescript
+const input = fhevm.contract.createInput(contractAddress, userAddress);
+input.add8(42);
+const { handles, inputProof } = await input.encrypt();
 ```
-
-### Decryption
-
-```vue
-<script setup>
-import { ref } from 'vue';
-import { useDecrypt } from '@astral/fhevm-sdk/vue';
-
-const { requestDecryption, decrypting } = useDecrypt();
-const value = ref(null);
-
-const handleDecrypt = async () => {
-  value.value = await requestDecryption(handle, contractAddr);
-};
-</script>
-```
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-
-## Technologies
-
-- **Vue 3** - Progressive JavaScript framework
-- **TypeScript** - Type safety
-- **Vite** - Fast build tool
-- **FHEVM SDK** - Fully Homomorphic Encryption
-- **Ethers.js** - Ethereum library
 
 ## Learn More
 
 - [FHEVM SDK Documentation](../../lib/fhevm-sdk/README.md)
-- [API Reference](../../lib/fhevm-sdk/docs/API.md)
-- [Vue Documentation](https://vuejs.org/)
-
-## Support
-
-- 💬 [Discord Community](https://discord.gg/zama)
-- 🐛 [Report Issues](https://github.com/OliverHauck/fheAstralCompatibility/issues)
-- 📚 [Full Documentation](https://github.com/OliverHauck/fheAstralCompatibility)
-
----
-
-**Built with ❤️ using Universal FHEVM SDK**
+- [Vue 3 Documentation](https://vuejs.org/)
+- [Zama FHEVM](https://docs.zama.ai/fhevm)

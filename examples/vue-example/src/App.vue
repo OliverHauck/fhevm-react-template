@@ -1,78 +1,40 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import EncryptionDemo from './components/EncryptionDemo.vue'
+import ComputationDemo from './components/ComputationDemo.vue'
+</script>
+
 <template>
-  <div id="app">
-    <header>
-      <h1>🌟 FHEVM SDK - Vue 3 Example</h1>
-      <p>Privacy-preserving encryption with Zama's FHE technology</p>
-    </header>
-
-    <main>
+  <div>
+    <h1>FHEVM SDK - Vue 3 Demo</h1>
+    <p class="subtitle">Vue Composition API with FHEVM SDK Integration</p>
+    
+    <div class="demos">
       <EncryptionDemo />
-      <ContractDemo />
-      <DecryptionDemo />
-    </main>
-
-    <footer>
-      <p>Built with Universal FHEVM SDK | <a href="https://github.com/OliverHauck/fheAstralCompatibility">GitHub</a></p>
-    </footer>
+      <ComputationDemo />
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import EncryptionDemo from './components/EncryptionDemo.vue';
-import ContractDemo from './components/ContractDemo.vue';
-import DecryptionDemo from './components/DecryptionDemo.vue';
-</script>
-
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+<style scoped>
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #fff, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  padding: 20px;
-}
-
-#app {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-header {
-  text-align: center;
-  color: white;
-  margin-bottom: 40px;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-header p {
+.subtitle {
   font-size: 1.2rem;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
 }
 
-main {
+.demos {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-}
-
-footer {
-  text-align: center;
-  color: white;
-  margin-top: 40px;
-  opacity: 0.8;
-}
-
-footer a {
-  color: white;
-  text-decoration: underline;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
 </style>
