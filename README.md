@@ -1,14 +1,14 @@
 # 🌟 Universal FHEVM SDK
 
-> **Framework-agnostic SDK for building confidential dApps with Zama's fhEVM**
+> **Framework-Agnostic SDK for Building Confidential dApps with Zama's fhEVM**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![fhEVM](https://img.shields.io/badge/fhEVM-v0.5-purple)](https://www.zama.ai/fhevm)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 
-**Live Demo**: [https://oliverhauck.github.io/FHEAstralCompatibility/](https://oliverhauck.github.io/FHEAstralCompatibility/)
+**Live Demo**: Coming soon
 
-**Repository**: [https://github.com/OliverHauck/fhevm-react-template](https://github.com/OliverHauck/fhevm-react-template)
+**Repository**: [GitHub Repository URL]
 
 ---
 
@@ -17,26 +17,27 @@
 The **Universal FHEVM SDK** is a developer-friendly solution for building confidential decentralized applications using Zama's Fully Homomorphic Encryption (FHE) technology. It provides a clean, wagmi-inspired API that works seamlessly across React, Vue, Next.js, and Node.js.
 
 **Key Features:**
-- 🚀 **< 10 lines of code** to get started
-- 📦 **Framework-agnostic** - React, Vue, Next.js, Node.js
+- 🚀 **Less than 10 lines of code** to get started
+- 📦 **Framework-agnostic** - Works with React, Vue, Next.js, and Node.js
 - 🔒 **Type-safe** with full TypeScript support
 - 🎨 **Intuitive API** inspired by wagmi
-- 📚 **Comprehensive documentation** with examples
-- ⚡ **Production-ready** with error handling
+- 📚 **Comprehensive documentation** with real-world examples
+- ⚡ **Production-ready** with robust error handling
+- 🔐 **Privacy-first** - All data encrypted end-to-end
 
 ---
 
 ## 🎥 Video Demo
 
-📹 **Download and watch `demo.mp4`** to see the complete SDK setup, integration workflow, and example applications in action.
+📹 Watch the complete SDK setup, integration workflow, and example applications in action.
 
 The demo covers:
 - SDK installation and configuration
 - Framework integration (React, Vue, Node.js, Next.js)
 - Encryption and decryption workflows
-- Contract integration patterns
-- Three complete example applications
-- Showcase dApp (Astral Compatibility)
+- Smart contract integration patterns
+- Multiple complete example applications
+- Privacy-preserving dApp showcase
 
 ---
 
@@ -52,7 +53,7 @@ pnpm add @astral/fhevm-sdk
 yarn add @astral/fhevm-sdk
 ```
 
-### Node.js (3 lines!)
+### Node.js Example (3 lines!)
 
 ```typescript
 import { createFHEVM } from '@astral/fhevm-sdk';
@@ -60,44 +61,57 @@ const fhevm = await createFHEVM({ chainId: 11155111 });
 const encrypted = await fhevm.encrypt.uint8(42);
 ```
 
-### React/Next.js (5 lines!)
+### React/Next.js Example (5 lines!)
 
 ```tsx
 import { FHEVMProvider, useFHEVM } from '@astral/fhevm-sdk/react';
 
-// 1. Wrap your app
+// Wrap your application
 <FHEVMProvider config={{ chainId: 11155111 }}>
   <App />
 </FHEVMProvider>
 
-// 2. Use in components
+// Use in components
 function MyComponent() {
   const fhevm = useFHEVM();
   const encrypted = await fhevm.encrypt.uint8(42);
-  return <div>Encrypted!</div>;
+  return <div>Data Encrypted!</div>;
 }
 ```
 
-### Vue 3 (4 lines!)
+### Vue 3 Example (4 lines!)
 
 ```vue
 <script setup>
-import { useFHEVM } from '@astral/fhevm-sdk/vue';
-const fhevm = useFHEVM();
+import { createFHEVM } from '@astral/fhevm-sdk';
+const fhevm = await createFHEVM({ chainId: 11155111 });
 const encrypted = await fhevm.encrypt.uint8(42);
 </script>
 ```
 
 ---
 
-## 📦 What's Included
+## 📦 Repository Structure
 
-### Core SDK (`lib/fhevm-sdk/`)
-- **Framework-agnostic core** - Works everywhere
-- **React integration** - Hooks and Provider
-- **Vue integration** - Composables
-- **Complete TypeScript types** - Full type safety
-- **Comprehensive error handling** - Production-ready
+### Packages (`packages/`)
+- **`fhevm-sdk/`** - Core SDK package with framework-agnostic functionality
+
+### Templates (`templates/`)
+- **`nextjs/`** - Next.js App Router template with full FHE integration
+- **`react/`** - Create React App template
+- **`vue/`** - Vue 3 + Vite template
+
+### Examples (`examples/`)
+- **`nextjs-demo/`** - Comprehensive Next.js demo with all features
+- **`nodejs-example/`** - Node.js CLI example
+- **`vue-example/`** - Vue 3 example application
+- **`FHEAstralCompatibility/`** - Privacy-preserving zodiac compatibility dApp (Vanilla JS)
+- **`astral-compatibility-react/`** - React version of Astral Compatibility dApp
+
+### Documentation (`docs/`)
+- **`API.md`** - Complete API reference
+- **`QUICKSTART.md`** - Getting started guide
+- **`DEPLOYMENT.md`** - Deployment instructions
 
 ### Showcase Application
 **Astral Compatibility** - Privacy-preserving zodiac matching platform demonstrating:
@@ -135,11 +149,12 @@ fhevm-react-template/
 │   ├── QUICKSTART.md           # Quick start guide
 │   └── DEPLOYMENT.md           # Deployment instructions
 │
-├── examples/                   # Example implementations (4 demos)
+├── examples/                   # Example implementations (5 demos)
 │   ├── nextjs-demo/           # Next.js 14 App Router + React Hooks
 │   ├── vue-example/           # Vue 3 Composition API + Composables
 │   ├── nodejs-example/        # Node.js CLI & Express API Server
-│   └── FHEAstralCompatibility/ # Vanilla JS Showcase dApp
+│   ├── FHEAstralCompatibility/ # Vanilla JS Showcase dApp
+│   └── astral-compatibility-react/ # React 18 CRA + Context API
 │
 ├── contracts/                  # Smart contracts (fhEVM v0.5)
 │   ├── AstralCompatibility.sol      # FHE contract
@@ -355,7 +370,7 @@ const encrypted = await fhevm.encrypt.uint8(42);
 - ✅ Well-documented patterns
 
 ### Example Applications
-Four complete example applications demonstrate SDK versatility across different frameworks:
+Five complete example applications demonstrate SDK versatility across different frameworks:
 
 **1. Next.js Demo** (`examples/nextjs-demo/`)
 - ✅ Modern Next.js 14 App Router with React 18
@@ -368,7 +383,7 @@ Four complete example applications demonstrate SDK versatility across different 
 
 **2. Vue 3 Demo** (`examples/vue-example/`)
 - ✅ Vue 3 Composition API
-- ✅ SDK Vue Composables (`useFHEVM`)
+- ✅ SDK core integration with reactive patterns
 - ✅ Reactive encryption workflows
 - ✅ Vite development server
 - ✅ Component-based architecture
@@ -389,6 +404,15 @@ Four complete example applications demonstrate SDK versatility across different 
 - ✅ Real-world use case demonstration
 - ✅ Live deployment on Sepolia testnet
 - ✅ **Manual Integration**: ~50+ lines (shows SDK value!)
+
+**5. Astral Compatibility React** (`examples/astral-compatibility-react/`)
+- ✅ Modern React 18 with Create React App
+- ✅ Component-based architecture with Context API
+- ✅ Privacy-preserving zodiac matching (same as vanilla version)
+- ✅ Web3 integration with ethers.js v5 and MetaMask
+- ✅ Responsive design with modern UI/UX
+- ✅ Real-time contract event listeners
+- ✅ **React Integration**: Component-based approach with hooks
 
 ---
 
@@ -548,7 +572,7 @@ node examples/server.js    # Express server on :3000
 
 ---
 
-### 4. FHE Astral Compatibility (`examples/FHEAstralCompatibility/`)
+### 4. FHE Astral Compatibility - Vanilla JS (`examples/FHEAstralCompatibility/`)
 **Vanilla JavaScript Showcase** - Complete dApp demonstrating privacy-preserving zodiac matching:
 
 **SDK Integration:**
@@ -609,6 +633,89 @@ python -m http.server 8000
 
 ---
 
+### 5. Astral Compatibility - React (`examples/astral-compatibility-react/`)
+**Modern React Implementation** - React version of the privacy-preserving zodiac matching dApp:
+
+**React Integration:**
+```javascript
+import { useWeb3 } from './context/Web3Context';
+
+// Centralized Web3 state management with Context API
+const {
+  account, hasProfile, userMatches, totalMatches,
+  connectWallet, createProfile, updateProfile, requestMatch
+} = useWeb3();
+
+// Component-based architecture with reusable UI components
+<Web3Provider>
+  <Navbar />
+  <Hero />
+  <CreateProfile />
+  <CompatibilityMatch />
+</Web3Provider>
+```
+
+**Features:**
+- ✅ **Modern React 18** with Hooks and Context API
+- ✅ **Component-Based Architecture** for better code organization
+- ✅ **Web3 Integration** with ethers.js v5 and MetaMask
+- ✅ **Privacy-Preserving Matching** - Same FHE functionality as vanilla version
+- ✅ **Real-time Updates** - Contract event listeners for live data
+- ✅ **Responsive Design** - Mobile-friendly interface
+- ✅ **UX Enhancements** - Loading modals, toast notifications
+- ✅ **State Management** - Centralized Web3 context provider
+- ✅ **Reusable Components** - Navbar, Hero, CreateProfile, CompatibilityMatch, etc.
+
+**Component Architecture:**
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Navbar.js       # Navigation with wallet connection
+│   ├── Hero.js         # Landing section with stats
+│   ├── CreateProfile.js # Profile creation form
+│   ├── CompatibilityMatch.js # Match request interface
+│   └── ...             # Other components
+├── context/
+│   └── Web3Context.js  # Web3 state management
+├── config/
+│   └── contract.js     # Contract ABI and config
+└── App.js              # Main app component
+```
+
+**Technology Stack:**
+- Frontend: React 18, Create React App
+- Web3: ethers.js v5, MetaMask
+- Smart Contract: Solidity 0.8.24 with fhEVM v0.5
+- Network: Sepolia testnet
+
+**Key Differences from Vanilla Version:**
+
+| Feature | Vanilla JS | React Version |
+|---------|-----------|---------------|
+| Architecture | Procedural | Component-based |
+| State Management | Manual DOM | React Context + Hooks |
+| Code Organization | Single files | Modular components |
+| Reusability | Limited | High |
+| Maintainability | Medium | High |
+
+**Quick Start:**
+```bash
+cd examples/astral-compatibility-react
+npm install
+npm run dev
+# Open http://localhost:3000
+```
+
+**Build for Production:**
+```bash
+npm run build
+# Build folder contains optimized files
+```
+
+[View Documentation →](./examples/astral-compatibility-react/README.md)
+
+---
+
 ## 📊 SDK Integration Comparison
 
 | Example | Framework | SDK Usage | Integration Pattern | Lines of Code |
@@ -616,9 +723,11 @@ python -m http.server 8000
 | **Next.js** | React 18 + Next.js 14 | `@astral/fhevm-sdk/react` | Provider + Hooks | ~5 lines |
 | **Vue 3** | Vue 3 + Vite | `@astral/fhevm-sdk/vue` | Composables | ~4 lines |
 | **Node.js** | Node.js + Express | `@astral/fhevm-sdk` (core) | Direct API | ~3 lines |
-| **Astral** | Vanilla JS | ethers.js + fhevmjs | Manual integration | ~50+ lines |
+| **Astral (Vanilla)** | Vanilla JS | ethers.js + fhevmjs | Manual integration | ~50+ lines |
+| **Astral (React)** | React 18 + CRA | ethers.js v5 | Context API + Hooks | Component-based |
 
 **Key Insight:** The SDK reduces FHE integration from 50+ lines (manual) to just 3-5 lines (SDK)!
+**Comparison:** React version demonstrates modern component architecture vs vanilla JS procedural approach.
 
 ---
 
@@ -686,6 +795,14 @@ npx http-server -p 8000
 
 # Option 3: View live deployment
 # https://oliverhauck.github.io/FHEAstralCompatibility/
+```
+
+**Astral Compatibility React (Modern React Version):**
+```bash
+cd examples/astral-compatibility-react
+npm install
+npm run dev
+# Open http://localhost:3000
 ```
 
 ### 5. Launch Showcase App (Alternative)
