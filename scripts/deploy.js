@@ -2,54 +2,54 @@ const hre = require("hardhat");
 require("dotenv").config();
 
 async function main() {
-  console.log("🚀 开始部署 AstralCompatibility 合约...\n");
+  console.log("🚀 Starting AstralCompatibility contract deployment...\n");
 
-  // 获取部署账户
+  // Get deployment account
   const [deployer] = await hre.ethers.getSigners();
-  console.log("📝 部署账户地址:", deployer.address);
+  console.log("📝 Deployer address:", deployer.address);
 
   const balance = await deployer.getBalance();
-  console.log("💰 账户余额:", hre.ethers.utils.formatEther(balance), "ETH\n");
+  console.log("💰 Account balance:", hre.ethers.utils.formatEther(balance), "ETH\n");
 
-  // 部署合约
-  console.log("⏳ 正在部署 AstralCompatibility 合约...");
+  // Deploy contract
+  console.log("⏳ Deploying AstralCompatibility contract...");
   const AstralCompatibility = await hre.ethers.getContractFactory("AstralCompatibility");
   const contract = await AstralCompatibility.deploy();
 
   await contract.deployed();
 
-  console.log("✅ 合约部署成功!");
-  console.log("📍 合约地址:", contract.address);
-  console.log("🔗 交易哈希:", contract.deployTransaction.hash);
-  console.log("⛽ Gas 使用量:", contract.deployTransaction.gasLimit.toString());
+  console.log("✅ Contract deployed successfully!");
+  console.log("📍 Contract address:", contract.address);
+  console.log("🔗 Transaction hash:", contract.deployTransaction.hash);
+  console.log("⛽ Gas used:", contract.deployTransaction.gasLimit.toString());
 
-  // 等待几个区块确认
-  console.log("\n⏳ 等待区块确认...");
+  // Wait for block confirmations
+  console.log("\n⏳ Waiting for block confirmations...");
   await contract.deployTransaction.wait(5);
-  console.log("✅ 区块确认完成\n");
+  console.log("✅ Block confirmations complete\n");
 
-  // 显示合约信息
-  console.log("📊 合约信息:");
+  // Display contract information
+  console.log("📊 Contract information:");
   console.log("- Owner:", await contract.owner());
   console.log("- Total Matches:", (await contract.totalMatches()).toString());
 
-  // 配置暂停器地址 (如果需要)
+  // Configure pauser addresses (if needed)
   const numPausers = parseInt(process.env.NUM_PAUSERS || "0");
   if (numPausers > 0) {
-    console.log("\n⚙️  配置暂停器地址...");
+    console.log("\n⚙️  Configuring pauser addresses...");
     for (let i = 0; i < numPausers; i++) {
       const pauserAddress = process.env[`PAUSER_ADDRESS_${i}`];
       if (pauserAddress && pauserAddress !== "0x0000000000000000000000000000000000000000") {
         console.log(`- Pauser ${i}:`, pauserAddress);
-        // 注意: AstralCompatibility 合约需要添加配置暂停器的函数
+        // Note: AstralCompatibility contract needs pauser configuration function
       }
     }
   }
 
-  // 验证合约
+  // Verify contract
   if (process.env.ETHERSCAN_API_KEY) {
-    console.log("\n🔍 准备验证合约...");
-    console.log("等待 30 秒后开始验证...");
+    console.log("\n🔍 Preparing contract verification...");
+    console.log("Waiting 30 seconds before verification...");
     await new Promise(resolve => setTimeout(resolve, 30000));
 
     try {
@@ -57,21 +57,21 @@ async function main() {
         address: contract.address,
         constructorArguments: [],
       });
-      console.log("✅ 合约验证成功!");
+      console.log("✅ Contract verified successfully!");
     } catch (error) {
-      console.log("❌ 合约验证失败:", error.message);
+      console.log("❌ Contract verification failed:", error.message);
     }
   }
 
-  // 输出配置信息供前端使用
-  console.log("\n📋 前端配置信息:");
+  // Output configuration for frontend
+  console.log("\n📋 Frontend configuration:");
   console.log("==================================");
   console.log("CONTRACT_ADDRESS:", contract.address);
   console.log("CHAIN_ID: 11155111");
   console.log("NETWORK: Sepolia");
   console.log("==================================\n");
 
-  // 保存部署信息
+  // Save deployment information
   const fs = require("fs");
   const deploymentInfo = {
     network: "sepolia",
@@ -87,12 +87,12 @@ async function main() {
     "deployment-info.json",
     JSON.stringify(deploymentInfo, null, 2)
   );
-  console.log("💾 部署信息已保存到 deployment-info.json\n");
+  console.log("💾 Deployment information saved to deployment-info.json\n");
 }
 
 main()
   .then(() => process.exit(0))
   .catch((error) => {
-    console.error("❌ 部署失败:", error);
+    console.error("❌ Deployment failed:", error);
     process.exit(1);
   });
