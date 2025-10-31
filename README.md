@@ -6,7 +6,7 @@
 [![fhEVM](https://img.shields.io/badge/fhEVM-v0.5-purple)](https://www.zama.ai/fhevm)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 
-**Live Demo**: [https://oliverhauck.github.io/fheAstralCompatibility/](https://oliverhauck.github.io/fheAstralCompatibility/)
+**Live Demo**: [https://oliverhauck.github.io/FHEAstralCompatibility/](https://oliverhauck.github.io/FHEAstralCompatibility/)
 
 **Repository**: [https://github.com/OliverHauck/fhevm-react-template](https://github.com/OliverHauck/fhevm-react-template)
 
@@ -310,7 +310,7 @@ All computations happen on **encrypted data** using Fully Homomorphic Encryption
 5. **Reveal Score** - Request decryption with proper permissions to view the score
 
 ### Live Demo
-🌐 **[Try it now](https://oliverhauck.github.io/fheAstralCompatibility/)** - Deployed on Sepolia testnet
+🌐 **[Try it now](https://oliverhauck.github.io/FHEAstralCompatibility/)** - Deployed on Sepolia testnet
 
 ---
 
@@ -598,7 +598,7 @@ python -m http.server 8000
 # Open http://localhost:8000
 ```
 
-**Live Demo:** [https://oliverhauck.github.io/fheAstralCompatibility/](https://oliverhauck.github.io/fheAstralCompatibility/)
+**Live Demo:** [https://oliverhauck.github.io/FHEAstralCompatibility/](https://oliverhauck.github.io/FHEAstralCompatibility/)
 
 ---
 
@@ -678,7 +678,7 @@ npx http-server -p 8000
 # Open http://localhost:8000
 
 # Option 3: View live deployment
-# https://oliverhauck.github.io/fheAstralCompatibility/
+# https://oliverhauck.github.io/FHEAstralCompatibility/
 ```
 
 ### 5. Launch Showcase App (Alternative)
@@ -767,7 +767,7 @@ MIT © 2024 Universal FHEVM SDK
 ## 📞 Support
 
 ### Links
-- 🌐 **Website**: [https://oliverhauck.github.io/fheAstralCompatibility/](https://oliverhauck.github.io/fheAstralCompatibility/)
+- 🌐 **Website**: [https://oliverhauck.github.io/FHEAstralCompatibility/](https://oliverhauck.github.io/FHEAstralCompatibility/)
 - 📦 **GitHub**: [https://github.com/OliverHauck/fhevm-react-template](https://github.com/OliverHauck/fhevm-react-template)
 - 🔍 **Contract**: [Sepolia Etherscan](https://sepolia.etherscan.io/address/0x3897f97Cdfa21926450B05329B55AC7F85F7F066)
 - 📚 **SDK Docs**: [lib/fhevm-sdk/README.md](./lib/fhevm-sdk/README.md)
@@ -794,7 +794,7 @@ MIT © 2024 Universal FHEVM SDK
 
 **Built with ❤️ for the FHEVM Season 2 Bounty**
 
-[Website](https://oliverhauck.github.io/fheAstralCompatibility/) • [GitHub](https://github.com/OliverHauck/fhevm-react-template) • [SDK Docs](./lib/fhevm-sdk/README.md) • [Issues](https://github.com/OliverHauck/fhevm-react-template/issues)
+[Website](https://oliverhauck.github.io/FHEAstralCompatibility/) • [GitHub](https://github.com/OliverHauck/fhevm-react-template) • [SDK Docs](./lib/fhevm-sdk/README.md) • [Issues](https://github.com/OliverHauck/fhevm-react-template/issues)
 
 </div>
 
